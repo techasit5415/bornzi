@@ -9,11 +9,16 @@ from typing import Literal
 class EmbeddingFactory:
     """Factory class สำหรับสร้าง embedding models"""
     
-    # รายการ models ที่รองรับ
+    # รายการ models ที่รองรับ (ตรงกับที่ติดตั้งใน Ollama)
     SUPPORTED_MODELS = {
+        "deepseek-r1:14b": {
+            "name": "DeepSeek R1 14B",
+            "description": "Model DeepSeek เน้นความเข้าใจลึก มีเหตุผล (แนะนำ)",
+            "size": "14B parameters"
+        },
         "gemma2:27b": {
             "name": "Gemma 2 27B",
-            "description": "Model ใหญ่ ความแม่นยำสูง แต่ช้ากว่า",
+            "description": "Model ใหญ่ที่สุด ความแม่นยำสูง แต่ช้ากว่า",
             "size": "27B parameters"
         },
         "gemma2:9b": {
@@ -21,20 +26,15 @@ class EmbeddingFactory:
             "description": "Model กลาง สมดุลระหว่างความเร็วและความแม่นยำ",
             "size": "9B parameters"
         },
-        "gemma2:2b": {
-            "name": "Gemma 2 2B",
-            "description": "Model เล็ก เร็วมาก เหมาะกับเอกสารทั่วไป",
-            "size": "2B parameters"
+        "llama3.1:8b": {
+            "name": "Llama 3.1 8B",
+            "description": "Model จาก Meta เร็วและมีประสิทธิภาพ",
+            "size": "8B parameters"
         },
-        "nomic-embed-text": {
-            "name": "Nomic Embed Text",
-            "description": "Model เฉพาะทาง embedding ประสิทธิภาพสูง",
-            "size": "137M parameters"
-        },
-        "mxbai-embed-large": {
-            "name": "MixedBread AI Embed Large",
-            "description": "Model embedding คุณภาพสูง รองรับหลายภาษา",
-            "size": "335M parameters"
+        "gemma3:12b": {
+            "name": "Gemma 3 12B",
+            "description": "Model Gemma รุ่นใหม่ ประสิทธิภาพดีขึ้น",
+            "size": "12B parameters"
         }
     }
     
@@ -86,8 +86,8 @@ def get_recommended_model(document_size: int) -> str:
         ชื่อ model ที่แนะนำ
     """
     if document_size < 10000:
-        return "nomic-embed-text"  # เร็ว เหมาะกับเอกสารเล็ก
+        return "llama3.1:8b"  # เร็ว เหมาะกับเอกสารเล็ก
     elif document_size < 50000:
-        return "gemma2:9b"  # สมดุล
+        return "deepseek-r1:14b"  # สมดุล แนะนำ
     else:
-        return "gemma2:27b"  # คุณภาพสูง สำหรับเอกสารใหญ่
+        return "gemma2:27b"  # คุณภาพสูงสุด สำหรับเอกสารใหญ่

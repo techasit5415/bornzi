@@ -65,7 +65,7 @@ def create_llm(model="gemma2:27b", base_url="http://localhost:11434"):
         base_url=base_url,
         temperature=0,          # แม่นยำสูงสุด
         num_ctx=32768,          # เพิ่มเป็น 32k เพื่อรองรับข้อมูลเยอะ
-        num_predict=4096,       # เพิ่มความยาวคำตอบ
+        num_predict=4096,       # จำนวน token เพิ่มความยาวคำตอบ
         top_k=1,               # เลือกคำที่แน่ใจสุด
         top_p=0.05,            # ลดลงเพื่อความแม่นยำสูงสุด
         repeat_penalty=1.2      # เพิ่มเพื่อป้องกันซ้ำ

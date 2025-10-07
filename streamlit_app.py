@@ -29,7 +29,7 @@ if 'pdf_processed' not in st.session_state:
 if 'current_pdf_name' not in st.session_state:
     st.session_state.current_pdf_name = None
 if 'embedding_model' not in st.session_state:
-    st.session_state.embedding_model = "gemma2:27b"
+    st.session_state.embedding_model = "gemma2:27b"  # ใช้ DeepSeek เป็นค่าเริ่มต้น
 
 # Constants
 VECTORSTORE_DIR = "vectorstore_cache"
